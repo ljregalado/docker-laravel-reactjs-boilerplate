@@ -2,31 +2,57 @@
 
 ## How to use
 
-1. Build the image
+1. Copy and customize the configuration options
 
 ```
-docker-compose build;
+cp .env.example .env
+cp laravel/.env.example laravel/.env
 ```
 
-2. Run the image
+2. Build the image
 
-```
-docker-compose up -d;
-```
-
-3. Compile the assets
-
-```
-npm run dev
+```bash
+$ docker-compose build;
 ```
 
-4. Boot up a development server
+3. Run the image
 
-```
-php artisan serve
+```bash
+$ docker-compose up -d;
 ```
 
-5. Now, you can point your browser to localhost, http://localhost:8000/
+4. Install the dependencies with composer
+
+```bash
+$ docker-compose exec app composer install
+$ docker-compose exec app composer dumpautoload -o
+$ docker-compose exec app php artisan key:generate
+```
+
+7. Clear the config and generate the cache
+
+```bash
+$ docker-compose exec app php artisan config:clear
+$ docker-compose exec app php artisan config:cache
+```
+
+8. Install all the javascript packages which are required for our project
+
+```bash
+$ cd app
+$ npm install
+```
+
+9. Compile the assets
+
+```bash
+$ npm run dev
+
+# Or, to watch the changes done in the assets folder and recompile automatically
+$ npm run watch
+```
+
+10. Now, you can point your browser to localhost, http://localhost:8000/
 
 Thats it. The boilerplate is running.
 

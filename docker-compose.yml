@@ -5,14 +5,15 @@ services:
   app:
     build:
       context: ./
-      dockerfile: ops/docker/Dockerfile
+      dockerfile: Dockerfile
     image: php-app
     restart: unless-stopped
-    working_dir: /var/www/
+    working_dir: /var/www
     volumes:
       - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
-      - mynetwork
+      - app-network
     
  #Nginx Service
   nginx:
@@ -22,9 +23,9 @@ services:
       - 8000:80
     volumes:
       - ./:/var/www
-      - ./nginx/conf.d:/etc/nginx/conf.d/
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
     networks:
-      - mynetwork
+      - app-network
 
   #Mysl Service
   db:
@@ -35,9 +36,11 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
-      - mynetwork
+      - app-network
       
 networks:
-  mynetwork:
+  app-network:
     driver: bridge
