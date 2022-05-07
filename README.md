@@ -39,17 +39,16 @@ $ docker-compose exec app php artisan config:cache
 8. Install all the javascript packages which are required for our project
 
 ```bash
-$ cd app
-$ npm install
+$ docker-compose run --rm npm install
 ```
 
 9. Compile the assets
 
 ```bash
-$ npm run dev
+$ docker-compose run --rm npm run dev
 
 # Or, to watch the changes done in the assets folder and recompile automatically
-$ npm run watch
+$ docker-compose run --rm npm run watch
 ```
 
 10. Now, you can point your browser to localhost, http://localhost:8000/

@@ -5,7 +5,7 @@ services:
   app:
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: docker/php/Dockerfile
     image: php-app
     restart: unless-stopped
     working_dir: /var/www/laravel
@@ -42,6 +42,14 @@ services:
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
+
+  npm:
+    image: node:16.15.0
+    container_name: npm
+    volumes:
+      - ./laravel:/var/www/laravel
+    working_dir: /var/www/laravel
+    entrypoint: ['npm']
 
 networks:
   app-network:
