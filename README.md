@@ -6,7 +6,6 @@
 
 ```
 cp .env.example .env
-cp laravel/.env.example laravel/.env
 ```
 
 2. Build the image
@@ -24,6 +23,7 @@ $ docker-compose up -d;
 4. Install the dependencies with composer
 
 ```bash
+$ cp laravel/.env.example laravel/.env
 $ docker-compose exec app composer install
 $ docker-compose exec app composer dumpautoload -o
 $ docker-compose exec app php artisan key:generate

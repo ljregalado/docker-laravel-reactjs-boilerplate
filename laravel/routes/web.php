@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::fallback(function () {
+Route::get('/', function () {
     return view('welcome');
+});
+
+Route::fallback(function () {
+    return view('main');
 });

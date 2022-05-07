@@ -12,6 +12,8 @@
 </head>
 
 <body>
-    <h1>Welcome!</h1>
+    <div id="root"></div>
+    <script src="{{asset('js/app.js')}}"></script>
+</body>
 
 </html>

@@ -17,6 +17,7 @@ services:
     
  #Nginx Service
   nginx:
+    container_name: nginx
     image: nginx:alpine
     restart: unless-stopped
     ports:
@@ -29,6 +30,7 @@ services:
 
   #Mysl Service
   db:
+    container_name: mysql
     image: mysql:8
     restart: unless-stopped
     environment:
@@ -40,7 +42,7 @@ services:
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
-      
+
 networks:
   app-network:
     driver: bridge
